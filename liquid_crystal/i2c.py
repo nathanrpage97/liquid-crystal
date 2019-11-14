@@ -12,10 +12,17 @@ class I2C:
         self.__device = open(i2c_path, 'r+b', buffering=0)
         ioctl(self.__device.fileno(), I2C_SLAVE, i2c_address & 0x7F)
 
-    def write(self, command: int, value: int):
-        self.__device.write(struct.pack('>HH', command, value))
+    def write_command_arg(self, command: int, arg: int):
+        self.__device.write(struct.pack('>HH', command, arg))
 
-    def read(self, command: int) -> int:
+    def write_command(self, command: int):
         self.__device.write(struct.pack('>H', command))
-        (value,) = struct.unpack('>H', self.__device.read(2))
+
+    def read(self) -> int:
+        (value,) = struct.unpack('>H', self.__device.read(1))
+        return value
+
+    def read_data(self, command: int) -> int:
+        self.__device.write(struct.pack('>H', command))
+        (value,) = struct.unpack('>H', self.__device.read(1))
         return value

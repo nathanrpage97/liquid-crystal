@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='liquid_crystal',
-    version='0.0.1',
+    version='0.1.0',
     author="Nathan Page",
     author_email='nathanrpage97@gmail.com',
     description='Pure python driver for I2C LCD display',

@@ -76,8 +76,8 @@ class LiquidCrystalDriver:
         self.__write(LCD_ENTRYMODESET | LCD_ENTRYLEFT)
 
     def clear(self):
-        self.i2c_device.write_command(LCD_CLEARDISPLAY)
-        self.i2c_device.write_command(LCD_RETURNHOME)
+        self.__write(LCD_CLEARDISPLAY)
+        self.__write(LCD_RETURNHOME)
 
     def __write_four_bits(self, data: int):
         self.i2c_device.write_command(data | LCD_BACKLIGHT)
